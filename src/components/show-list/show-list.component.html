@@ -15,7 +15,7 @@
     <div nz-row nzAlign="middle" nzJustify="center">
       <div nz-col [nzSpan]="24">
         <div [innerHTML]="show.show.summary || '<p>(No description)</p>'"></div>
-        <button nz-button nzType="primary">Episodes</button>
+        <button nz-button nzType="primary" (click)="openModal(show.show.id)">Episodes</button>
       </div>
     </div>
     <nz-list-item-extra>
@@ -25,3 +25,15 @@
   </nz-list-item>
   <nz-list-empty *ngIf="shows.length === 0"></nz-list-empty>
 </nz-list>
+<nz-modal
+  nzWrapClassName="vertical-center-modal"
+  [(nzVisible)]="modalOpen"
+  nzWidth="80%"
+  nzTitle="Episodes"
+  (nzOnCancel)="closeModal()"
+  (nzOnOk)="closeModal()"
+>
+  <ng-container *nzModalContent>
+    <app-episodes-table></app-episodes-table>
+  </ng-container>
+</nz-modal>

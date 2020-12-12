@@ -3,7 +3,7 @@ import Language from './Language';
 import ShowGenre from './ShowGenre';
 import ShowStatus from './ShowStatus';
 import Rating from './Rating';
-import ShowImage from './ShowImage';
+import Image from './Image';
 import ShowLinks from './ShowLinks';
 
 interface ShowDetails {
@@ -17,7 +17,7 @@ interface ShowDetails {
   premiered: string;
   officialSite: string;
   rating: Rating;
-  image: ShowImage | null;
+  image: Image | null;
   summary: string;
   updated: number;
   _links: ShowLinks;

@@ -12,6 +12,7 @@ import en from '@angular/common/locales/en';
 import { SearchComponent } from '../components/search/search.component';
 import { LoaderComponent } from '../components/loader/loader.component';
 import { ShowListComponent } from '../components/show-list/show-list.component';
+import { EpisodesTableComponent } from '../components/episodes-table/episodes-table.component';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -22,6 +23,8 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 registerLocaleData(en);
 
@@ -30,7 +33,8 @@ registerLocaleData(en);
     AppComponent,
     SearchComponent,
     LoaderComponent,
-    ShowListComponent
+    ShowListComponent,
+    EpisodesTableComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,9 @@ registerLocaleData(en);
     NzSpinModule,
     NzListModule,
     NzGridModule,
-    NzDividerModule
+    NzDividerModule,
+    NzModalModule,
+    NzTableModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
