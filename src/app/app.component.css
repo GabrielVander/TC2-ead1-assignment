@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  color: white;
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.footer {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search {
+  min-width: 50%;
+}
