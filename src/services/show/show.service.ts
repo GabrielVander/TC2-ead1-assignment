@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable, of, Subject} from 'rxjs';
 import {NzNotificationService} from 'ng-zorro-antd/notification';
 import {catchError} from 'rxjs/operators';
 import Show from '../../models/Show';
@@ -12,27 +12,43 @@ export class ShowService {
 
   private showAPI = 'http://api.tvmaze.com';  // URL to web api
   private searchShowEndpoint = '/search/shows?q=';
-  private $shows: Show[] = [];
+  private $shows: BehaviorSubject<Show[]> = new BehaviorSubject<Show[]>([]);
+  private $searched: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private $loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient, private notification: NzNotificationService) {
   }
 
-  get shows(): Show[] {
+  get shows(): Subject<Show[]> {
     return this.$shows;
   }
 
-  set shows(value: Show[]) {
-    this.$shows = value;
+  get loading(): Subject<boolean> {
+    return this.$loading;
+  }
+
+  get searched(): Subject<boolean> {
+    return this.$searched;
   }
 
   searchShow(query: string): void {
+    this.updateSearched(query.length !== 0);
+    this.updateLoading(true);
     this.http
       .get<Show[]>(`${this.showAPI}${this.searchShowEndpoint}${query}`)
       .pipe(catchError(this.handleError<Show[]>('searchShow', [])))
       .subscribe(result => {
-        this.shows = result;
-        console.log(this.shows);
+        this.updateLoading(false);
+        this.$shows.next(result);
       });
+  }
+
+  private updateSearched(value: boolean): void {
+    this.$searched.next(value);
+  }
+
+  private updateLoading(value: boolean): void {
+    this.loading.next(value);
   }
 
   private handleError<T>(operation = 'operation', result?: T): (error: any) => Observable<T> {

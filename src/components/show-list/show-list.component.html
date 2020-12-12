@@ -1,0 +1,27 @@
+<nz-list nzItemLayout="vertical" [nzLoading]="loading" nzBordered>
+  <nz-list-item *ngFor="let show of shows; let i = index">
+    <nz-list-item-meta class="show-item">
+      <nz-list-item-meta-title>
+        <h1 nz-typography>
+          <a [href]="show.show.url">
+            {{ show.show.name }}
+          </a>
+        </h1>
+      </nz-list-item-meta-title>
+      <nz-list-item-meta-description>
+        Rating: {{show.show.rating.average || 'N/A'}}
+      </nz-list-item-meta-description>
+    </nz-list-item-meta>
+    <div nz-row nzAlign="middle" nzJustify="center">
+      <div nz-col [nzSpan]="24">
+        <div [innerHTML]="show.show.summary || '<p>(No description)</p>'"></div>
+        <button nz-button nzType="primary">Episodes</button>
+      </div>
+    </div>
+    <nz-list-item-extra>
+      <img alt="logo"
+           [src]="show.show.image?.medium || 'https://safetyaustraliagroup.com.au/wp-content/uploads/2019/05/image-not-found.png'"/>
+    </nz-list-item-extra>
+  </nz-list-item>
+  <nz-list-empty *ngIf="shows.length === 0"></nz-list-empty>
+</nz-list>

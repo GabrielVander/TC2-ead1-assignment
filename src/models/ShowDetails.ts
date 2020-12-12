@@ -17,7 +17,7 @@ interface ShowDetails {
   premiered: string;
   officialSite: string;
   rating: Rating;
-  image: ShowImage;
+  image: ShowImage | null;
   summary: string;
   updated: number;
   _links: ShowLinks;

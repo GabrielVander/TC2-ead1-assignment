@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ShowService} from '../../services/show/show.service';
 
 @Component({
